@@ -10,8 +10,9 @@ import (
 )
 
 var paused = false
-var x = 590
-var y = 375
+var x = 820
+var y = 520
+var diff = 70
 
 func GetLoot(el hook.Event) {
 	if paused {
@@ -19,19 +20,15 @@ func GetLoot(el hook.Event) {
 	}
 
 	robotgo.KeyDown("alt")
-	moveClick(x-50, y)
-	moveClick(x-50, y-50)
-	moveClick(x, y-50)
-	moveClick(x+50, y-50)
-	moveClick(x+50, y)
-	moveClick(x+50, y+50)
-	moveClick(x, y+50)
-	moveClick(x-50, y+50)
+	moveClick(x-diff, y)
+	moveClick(x-diff, y-diff)
+	moveClick(x, y-diff)
+	moveClick(x+diff, y-diff)
+	moveClick(x+diff, y)
+	moveClick(x+diff, y+diff)
+	moveClick(x, y+diff)
+	moveClick(x-diff, y+diff)
 	robotgo.KeyUp("alt")
-}
-
-func TogglePauseGetLoot() {
-	paused = !paused
 }
 
 func HelpLoot(el hook.Event) {
@@ -49,5 +46,9 @@ func HelpLoot(el hook.Event) {
 
 	if el.Keychar == config.StopHelpLoot {
 		fmt.Println(strings.Join(list, ","))
+	}
+
+	if el.Keychar == config.PauseGetLoot {
+		paused = !paused
 	}
 }
