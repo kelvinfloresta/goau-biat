@@ -14,12 +14,10 @@ func main() {
 func test() {
 	ev := hook.Start()
 	for el := range ev {
+		commands.HelpLoot(el)
+
 		if el.Keychar == config.GetLoot {
 			commands.GetLoot(el)
-		}
-
-		if el.Keychar == config.PauseGetLoot {
-			commands.TogglePauseGetLoot()
 		}
 	}
 }

@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"goau-biat/config"
+	"log"
 	"strings"
 
 	"github.com/go-vgo/robotgo"
@@ -35,20 +36,22 @@ func HelpLoot(el hook.Event) {
 	list := []string{}
 
 	if el.Keychar == config.CleanHelpLoot {
+		log.Default().Println("Clean Help Loot")
 		list = []string{}
 	}
 
-	if el.Keychar == config.SetPosHelpLoop {
+	if el.Keychar == config.SetPosHelpLoop || rune(el.Rawcode) == config.SetPosHelpLoop {
 		x, y := robotgo.GetMousePos()
-		fmt.Printf("Set: %d %d\n", x, y)
+		log.Default().Printf("Set Help Loot: %d %d\n", x, y)
 		list = append(list, fmt.Sprintf("%d %d", x, y))
 	}
 
-	if el.Keychar == config.StopHelpLoot {
-		fmt.Println(strings.Join(list, ","))
+	if el.Keychar == config.StopHelpLoot || rune(el.Rawcode) == config.StopHelpLoot {
+		log.Default().Println(strings.Join(list, ","))
 	}
 
-	if el.Keychar == config.PauseGetLoot {
+	if el.Keychar == config.PauseGetLoot || rune(el.Rawcode) == config.PauseGetLoot {
+		log.Default().Println("Pause Get Loot")
 		paused = !paused
 	}
 }
