@@ -12,12 +12,13 @@ func main() {
 }
 
 func test() {
-	ev := hook.Start()
-	for el := range ev {
-		commands.HelpLoot(el)
+	events := hook.Start()
 
-		if el.Keychar == config.GetLoot {
-			commands.GetLoot(el)
+	for ev := range events {
+		commands.ScheduleTimer(ev)
+		commands.HelpLoot(ev)
+		if ev.Keychar == config.GetLoot {
+			commands.GetLoot(ev)
 		}
 	}
 }

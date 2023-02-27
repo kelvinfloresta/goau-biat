@@ -11,9 +11,6 @@ import (
 )
 
 var paused = false
-var x = 820
-var y = 520
-var diff = 70
 
 func GetLoot(el hook.Event) {
 	if paused {
@@ -21,14 +18,14 @@ func GetLoot(el hook.Event) {
 	}
 
 	robotgo.KeyDown("alt")
-	moveClick(x-diff, y)
-	moveClick(x-diff, y-diff)
-	moveClick(x, y-diff)
-	moveClick(x+diff, y-diff)
-	moveClick(x+diff, y)
-	moveClick(x+diff, y+diff)
-	moveClick(x, y+diff)
-	moveClick(x-diff, y+diff)
+	moveClick(config.X-config.Diff, config.Y)
+	moveClick(config.X-config.Diff, config.Y-config.Diff)
+	moveClick(config.X, config.Y-config.Diff)
+	moveClick(config.X+config.Diff, config.Y-config.Diff)
+	moveClick(config.X+config.Diff, config.Y)
+	moveClick(config.X+config.Diff, config.Y+config.Diff)
+	moveClick(config.X, config.Y+config.Diff)
+	moveClick(config.X-config.Diff, config.Y+config.Diff)
 	robotgo.KeyUp("alt")
 }
 
