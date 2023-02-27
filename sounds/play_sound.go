@@ -13,6 +13,7 @@ import (
 type SoundFile string
 
 const UltimateReloaded = "ultimate-reloaded"
+const PreUltimateReloaded = "pre-ultimate-reloaded"
 
 func PlaySound(file SoundFile) error {
 	path := fmt.Sprintf("./sounds/%s/%s.mp3", config.Lang, file)

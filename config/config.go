@@ -9,9 +9,10 @@ const (
 	SetPosHelpLoop      = 'y'
 	StopHelpLoot        = 'u'
 
-	Lang         = "pt-br"
-	UltiamteKey  = '+'
-	UltimateTime = 28 * time.Second
+	Lang            = "pt-br"
+	UltiamteKey     = '+'
+	PreUltimateTime = 10 * time.Second
+	UltimateTime    = 40 * time.Second
 
 	X    = 870
 	Y    = 530
