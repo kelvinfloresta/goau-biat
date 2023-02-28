@@ -10,3 +10,12 @@ func Scheduler(fn func(), d time.Duration) {
 		fn()
 	})()
 }
+
+func PermaScheduler(fn func(), d time.Duration) {
+	go func() {
+		for {
+			fn()
+			time.Sleep(d)
+		}
+	}()
+}
