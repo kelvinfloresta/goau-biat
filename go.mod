@@ -6,6 +6,7 @@ require (
 	github.com/go-vgo/robotgo v0.100.10
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/hajimehoshi/oto v1.0.1
+	github.com/mitchellh/go-ps v1.0.0
 	github.com/robotn/gohook v0.31.3
 )
 
