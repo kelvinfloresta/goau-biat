@@ -9,23 +9,24 @@ import (
 	"github.com/go-vgo/robotgo"
 )
 
-func changeWindow() {
-	robotgo.ActivePID(21366)
-}
-
 func Rune() {
-	time.Sleep(5 * time.Second)
 
 	util.PermaScheduler(func() {
 		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 		changeWindow()
-		robotgo.KeyTap(config.EatFood)
+		for i := 0; i < 5; i++ {
+			robotgo.KeyTap(config.EatFood)
+			time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		}
+	}, config.FoodTime)
+
+	util.PermaScheduler(func() {
 		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
-		robotgo.KeyTap(config.EatFood)
-		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
-		robotgo.KeyTap(config.EatFood)
-		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
-		robotgo.KeyTap(config.EatFood)
+		changeWindow()
+		for i := 0; i < 5; i++ {
+			robotgo.KeyTap(config.EatFood)
+			time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		}
 	}, config.FoodTime)
 
 	util.PermaScheduler(func() {
@@ -55,7 +56,12 @@ func Rune() {
 	util.PermaScheduler(func() {
 		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 		changeWindow()
-		robotgo.KeyTap(config.CreateRune)
+
+		for i := 0; i < 5; i++ {
+			robotgo.KeyTap(config.CreateRune)
+			time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		}
+
 	}, config.RuneTime)
 
 }
