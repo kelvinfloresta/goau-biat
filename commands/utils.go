@@ -27,7 +27,7 @@ func getPid() int32 {
 	}
 
 	for _, process := range processList {
-		if strings.Contains(process.Executable(), "client") {
+		if strings.Contains(process.Executable(), "client") && !strings.Contains(process.Executable(), "ts3") {
 			return int32(process.Pid())
 		}
 	}

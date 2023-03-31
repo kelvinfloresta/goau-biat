@@ -1,12 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"goau-biat/commands"
 	"goau-biat/config"
+	"goau-biat/sounds"
 	"log"
+	"net"
+	"os"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
 	hook "github.com/robotn/gohook"
+	"github.com/tatsushid/go-fastping"
 )
 
 func main() {
@@ -15,6 +22,7 @@ func main() {
 		Items: []string{
 			"Rune",
 			"Loot",
+			"Monitor",
 		},
 	}
 
@@ -27,16 +35,25 @@ func main() {
 	switch command {
 	case "Loot":
 		log.Default().Println("Starting loot")
-		loot()
+		go loot()
 	case "Rune":
 		log.Default().Println("Starting rune")
-		startRune()
+		go startRune()
+	case "Monitor":
+		log.Default().Println("Starting Monitor")
+		go startMonitor()
 	}
+
+	select {}
 }
 
 func startRune() {
-	commands.Rune()
-	select {}
+	events := hook.Start()
+	go commands.Rune()
+
+	for ev := range events {
+		commands.Exit(ev)
+	}
 }
 
 func loot() {
@@ -44,8 +61,49 @@ func loot() {
 	for ev := range events {
 		commands.ScheduleTimer(ev)
 		commands.HelpLoot(ev)
+		commands.UltimateHealing(ev)
+		commands.SafeMagicShield(ev)
+
 		if ev.Keychar == config.GetLoot {
 			commands.GetLoot(ev)
 		}
+
+		if ev.Keychar == config.Checklist {
+			sounds.PlaySound(sounds.CheckListLostSouls)
+		}
+
 	}
+}
+
+func startMonitor() {
+	p := fastping.NewPinger()
+
+	err := p.AddIP("192.168.0.1")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	info := color.New(color.FgBlue).SetWriter(log.Default().Writer())
+	warning := color.New(color.FgYellow).SetWriter(log.Default().Writer())
+	danger := color.New(color.FgRed).SetWriter(log.Default().Writer())
+	superDanger := color.New(color.BgHiRed).SetWriter(log.Default().Writer())
+
+	p.OnRecv = func(addr *net.IPAddr, rtt time.Duration) {
+		latency := rtt.Milliseconds()
+		switch {
+		case latency < 10:
+			info.Printf("Good: %s \n", rtt)
+
+		case latency > 20 && latency < 50:
+			warning.Printf("Warning: %s \n", rtt)
+
+		case latency > 50 && latency < 100:
+			danger.Printf("Danger: %s \n", rtt)
+
+		case latency > 100:
+			superDanger.Printf("Danger: %s \n", rtt)
+		}
+	}
+
+	p.RunLoop()
 }

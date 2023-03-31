@@ -14,6 +14,7 @@ type SoundFile string
 
 const UltimateReloaded = "ultimate-reloaded"
 const PreUltimateReloaded = "pre-ultimate-reloaded"
+const CheckListLostSouls = "checklist-lost-souls"
 
 func PlaySound(file SoundFile) error {
 	path := fmt.Sprintf("./sounds/%s/%s.mp3", config.Lang, file)
