@@ -78,14 +78,14 @@ func loot() {
 		}
 
 		if ev.Keychar == config.Checklist {
-			sounds.PlaySound(sounds.CheckListLostSouls)
+			sounds.PlaySound(sounds.CheckListGoannas)
 		}
 
 	}
 }
 
 func togglePause(ev hook.Event) {
-	if ev.Keychar == config.PauseGetLoot || rune(ev.Rawcode) == config.PauseGetLoot {
+	if ev.Keychar == config.Pause || rune(ev.Rawcode) == config.Pause {
 		log.Default().Println("Pause Get Loot")
 		paused = !paused
 	}
