@@ -23,9 +23,7 @@ const (
 	ExuraVitaKey       = "v"
 	SafeMagicShieldKey = 'f'
 	Uh                 = 50 // 2
-	UhX                = 1650
-	UhY                = 596 // 2
-	UhRp               = 52  // 4
+	AttackRuneKey = 49
 
 	CancelRunes    = 27 // ESC
 	EatFood        = "f7"
