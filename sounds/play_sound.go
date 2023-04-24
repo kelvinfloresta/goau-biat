@@ -17,7 +17,7 @@ const PreUltimateReloaded = "pre-ultimate-reloaded"
 const CheckListLostSouls = "checklist-lost-souls"
 
 func PlaySound(file SoundFile) error {
-	path := fmt.Sprintf("./sounds/%s/%s.mp3", config.Lang, file)
+	path := fmt.Sprintf("/home/kelvin/workspace/goau-biat/sounds/%s/%s.mp3", config.Lang, file)
 	f, err := os.Open(path)
 	if err != nil {
 		return err
