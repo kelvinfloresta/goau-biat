@@ -56,12 +56,21 @@ func startRune() {
 	}
 }
 
+var paused = false
+
 func loot() {
 	events := hook.Start()
 	for ev := range events {
+		togglePause(ev)
+
+		if paused {
+			continue
+		}
+
 		commands.ScheduleTimer(ev)
 		commands.HelpLoot(ev)
 		commands.UltimateHealing(ev)
+		commands.SmarRune(ev)
 		commands.SafeMagicShield(ev)
 
 		if ev.Keychar == config.GetLoot {
@@ -72,6 +81,13 @@ func loot() {
 			sounds.PlaySound(sounds.CheckListLostSouls)
 		}
 
+	}
+}
+
+func togglePause(ev hook.Event) {
+	if ev.Keychar == config.PauseGetLoot || rune(ev.Rawcode) == config.PauseGetLoot {
+		log.Default().Println("Pause Get Loot")
+		paused = !paused
 	}
 }
 

@@ -10,13 +10,7 @@ import (
 	hook "github.com/robotn/gohook"
 )
 
-var paused = false
-
 func GetLoot(el hook.Event) {
-	if paused {
-		return
-	}
-
 	robotgo.KeyDown("alt")
 	moveClick(config.X-config.Diff, config.Y)
 	moveClick(config.X-config.Diff, config.Y-config.Diff)
@@ -45,10 +39,5 @@ func HelpLoot(el hook.Event) {
 
 	if el.Keychar == config.StopHelpLoot || rune(el.Rawcode) == config.StopHelpLoot {
 		log.Default().Println(strings.Join(list, ","))
-	}
-
-	if el.Keychar == config.PauseGetLoot || rune(el.Rawcode) == config.PauseGetLoot {
-		log.Default().Println("Pause Get Loot")
-		paused = !paused
 	}
 }
