@@ -23,6 +23,10 @@ const (
 	ExuraVitaKey       = "v"
 	SafeMagicShieldKey = 'f'
 	Uh                 = 50 // 2
+	UhX                = 1688
+	UhY                = 596
+	UhRp               = 52 // 4
+
 	AttackRuneKey = 49
 
 	CancelRunes    = 27 // ESC
