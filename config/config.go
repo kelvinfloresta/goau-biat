@@ -7,7 +7,7 @@ import (
 const (
 	GetLoot             = '-'
 	Checklist      rune = '*'
-	PauseGetLoot   rune = 65481 // F12
+	Pause          rune = 65481 // F12
 	CleanHelpLoot  rune = 65480 // F11
 	SetPosHelpLoop      = 'y'
 	StopHelpLoot        = 'u'
@@ -35,7 +35,7 @@ const (
 	EquipRing      = "f8"
 	RingTime       = 1 * time.Minute
 	EquipSoft      = "f9"
-	SoftTime       = 1 * time.Hour
+	SoftTime       = 10 * time.Minute
 	CreateRune     = "f10"
 	RuneTime       = 5 * time.Minute
 	AntiLogoutTime = 10 * time.Minute
