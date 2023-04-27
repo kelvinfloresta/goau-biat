@@ -2,6 +2,7 @@ package commands
 
 import (
 	"goau-biat/config"
+	"goau-biat/util"
 	"math/rand"
 	"time"
 
@@ -23,68 +24,67 @@ func Rune() {
 	for {
 		select {
 		case <-food.C:
+			util.RandomSleep(5, time.Second)
 			eatFood()
 
 		case <-antiLogout.C:
+			util.RandomSleep(5, time.Second)
 			stayLoggedIn()
 
 		case <-ring.C:
+			util.RandomSleep(10, time.Second)
 			equipRing()
 
 		case <-soft.C:
+			util.RandomSleep(10, time.Second)
 			equipSoft()
 
 		case <-runes.C:
+			util.RandomSleep(10, time.Second)
 			makeRune()
 		}
 	}
 }
 
 func makeRune() {
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	changeWindow()
-
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.CreateRune)
 		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
 	}
 }
 
 func equipSoft() {
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	changeWindow()
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipSoft)
-		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		util.RandomSleep(2, time.Second)
 	}
 }
 
 func equipRing() {
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	changeWindow()
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipRing)
-		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		util.RandomSleep(2, time.Second)
 	}
 }
 
 func stayLoggedIn() {
-	time.Sleep(time.Duration(1+rand.Intn(5)) * time.Second)
 	changeWindow()
 	robotgo.KeyTap("up")
-	time.Sleep(time.Duration(1+rand.Intn(5)) * time.Second)
+	util.RandomSleep(5, time.Second)
 	robotgo.KeyTap("down")
-	time.Sleep(time.Duration(1+rand.Intn(3)) * time.Second)
+	util.RandomSleep(3, time.Second)
 	robotgo.KeyTap("right")
-	time.Sleep(time.Duration(1+rand.Intn(6)) * time.Second)
+	util.RandomSleep(6, time.Second)
 	robotgo.KeyTap("left")
 }
 
 func eatFood() {
-	time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 	changeWindow()
 	for i := 0; i < 4; i++ {
 		robotgo.KeyTap(config.EatFood)
-		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+		util.RandomSleep(2, time.Second)
 	}
 }
