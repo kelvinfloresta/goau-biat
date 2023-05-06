@@ -2,6 +2,7 @@ package commands
 
 import (
 	"goau-biat/config"
+	"goau-biat/sounds"
 	"log"
 
 	hook "github.com/robotn/gohook"
@@ -10,13 +11,20 @@ import (
 var paused = false
 
 func togglePause(ev hook.Event) bool {
-	if isPauseEvent(ev) {
-		paused = !paused
-		log.Default().Printf("Paused: %t", paused)
-		return true
+	if !isPauseEvent(ev) {
+		return false
 	}
 
-	return false
+	paused = !paused
+	log.Default().Printf("Paused: %t", paused)
+
+	if paused {
+		sounds.PlaySound(sounds.Paused)
+	} else {
+		sounds.PlaySound(sounds.Resumed)
+	}
+
+	return true
 }
 
 func isPauseEvent(ev hook.Event) bool {

@@ -16,6 +16,8 @@ const UltimateReloaded = "ultimate-reloaded"
 const PreUltimateReloaded = "pre-ultimate-reloaded"
 const CheckListLostSouls = "checklist-lost-souls"
 const CheckListGoannas = "checklist-goannas"
+const Paused = "paused"
+const Resumed = "resumed"
 
 func PlaySound(file SoundFile) error {
 	path := fmt.Sprintf("/home/kelvin/workspace/goau-biat/sounds/%s/%s.mp3", config.Lang, file)
