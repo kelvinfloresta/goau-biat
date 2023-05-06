@@ -7,7 +7,7 @@ import (
 const (
 	GetLoot             = '-'
 	Checklist      rune = '*'
-	Pause          rune = 65481 // F12
+	Pause          rune = 27    // ESC
 	CleanHelpLoot  rune = 65480 // F11
 	SetPosHelpLoop      = 'y'
 	StopHelpLoot        = 'u'
@@ -29,7 +29,6 @@ const (
 
 	AttackRuneKey = 49
 
-	CancelRunes    = 27 // ESC
 	EatFood        = "f7"
 	FoodTime       = 10 * time.Minute
 	EquipRing      = "f8"
