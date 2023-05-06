@@ -42,4 +42,7 @@ const (
 	X    = 870
 	Y    = 530
 	Diff = 70
+
+	GatewayIP  = "192.168.0.1"
+	ExternalIP = "8.8.8.8"
 )
