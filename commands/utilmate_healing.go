@@ -24,7 +24,7 @@ func UltimateHealing(ev hook.Event) {
 
 	if ev.Rawcode == config.UhRp && util.IsKeyDown(ev.Kind) {
 		randX := rand.Intn(20) + config.UhX
-		randY := rand.Intn(3) + config.UhY + 20
+		randY := rand.Intn(3) + config.UhY + config.UhYDiff
 
 		delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
 		time.Sleep(delay)

@@ -22,10 +22,11 @@ const (
 
 	ExuraVitaKey       = "v"
 	SafeMagicShieldKey = 'f'
-	Uh                 = 50 // 2
-	UhX                = 1688
-	UhY                = 596
-	UhRp               = 52 // 4
+	Uh                 = 49 // 1
+	UhX                = 1642
+	UhY                = 88
+	UhYDiff            = 20
+	UhRp               = 50 // 2
 
 	AttackRuneKey = 49
 
