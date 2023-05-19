@@ -26,7 +26,7 @@ func StartRune() {
 	softTicker = time.NewTicker(config.SoftTime)
 	makeRuneTicker = time.NewTicker(config.RuneTime)
 
-	forceStart()
+	go forceStart()
 
 	go togglePauseRune()
 
@@ -56,6 +56,10 @@ func StartRune() {
 }
 
 func makeRune() {
+	if paused {
+		return
+	}
+
 	changeWindow()
 	logger.Println("Making rune")
 	for i := 0; i < 2; i++ {
@@ -67,6 +71,10 @@ func makeRune() {
 }
 
 func equipSoft() {
+	if paused {
+		return
+	}
+
 	changeWindow()
 	logger.Println("Equipping Soft")
 	for i := 0; i < 2; i++ {
@@ -76,6 +84,10 @@ func equipSoft() {
 }
 
 func equipRing() {
+	if paused {
+		return
+	}
+
 	changeWindow()
 	logger.Println("Equipping Ring")
 	for i := 0; i < 2; i++ {
@@ -85,6 +97,10 @@ func equipRing() {
 }
 
 func stayLoggedIn() {
+	if paused {
+		return
+	}
+
 	changeWindow()
 	logger.Println("Staying logged in")
 	robotgo.KeyTap("up")
@@ -97,6 +113,10 @@ func stayLoggedIn() {
 }
 
 func eatFood() {
+	if paused {
+		return
+	}
+
 	changeWindow()
 	logger.Println("Eating food")
 	for i := 0; i < 4; i++ {
@@ -131,7 +151,7 @@ func togglePauseRune() {
 			ringTicker.Reset(config.RingTime)
 			softTicker.Reset(config.SoftTime)
 			makeRuneTicker.Reset(config.RuneTime)
-			forceStart()
+			go forceStart()
 		}
 	}
 }
