@@ -5,12 +5,13 @@ import (
 )
 
 const (
-	GetLoot             = '-'
-	Checklist      rune = '*'
-	Pause          rune = 27    // ESC
-	CleanHelpLoot  rune = 65480 // F11
-	SetPosHelpLoop      = 'y'
-	StopHelpLoot        = 'u'
+	GetLoot               = '-'
+	Checklist      rune   = '*'
+	Pause          rune   = 27    // ESC
+	PauseUh        uint16 = 65481 // F12
+	CleanHelpLoot  rune   = 65480 // F11
+	SetPosHelpLoop        = 'y'
+	StopHelpLoot          = 'u'
 
 	Ssa       = 53 // num5
 	MightRing = "num8"
@@ -28,10 +29,10 @@ const (
 	UhYDiff            = 20
 	UhRp               = 50 // 2
 
-	AttackRuneKey = 49
+	AttackRuneKey = 65457
 
 	EatFood        = "f7"
-	FoodTime       = 10 * time.Minute
+	FoodTime       = 5 * time.Minute
 	EquipRing      = "f8"
 	RingTime       = 1 * time.Minute
 	EquipSoft      = "f9"
