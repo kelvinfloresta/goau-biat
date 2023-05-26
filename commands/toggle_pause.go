@@ -4,18 +4,23 @@ import (
 	"goau-biat/config"
 	"goau-biat/sounds"
 	"log"
+	"sync"
 
 	hook "github.com/robotn/gohook"
 )
 
 var paused = false
+var pauseMu sync.Mutex
 
 func togglePause(ev hook.Event) bool {
 	if !isPauseEvent(ev) {
 		return false
 	}
 
+	pauseMu.Lock()
 	paused = !paused
+	pauseMu.Unlock()
+
 	log.Default().Printf("Paused: %t", paused)
 
 	if paused {
