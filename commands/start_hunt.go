@@ -18,8 +18,8 @@ func StartHunt() {
 
 		ScheduleTimer(ev)
 		HelpLoot(ev)
-		UltimateHealing(ev)
-		SmarRune(ev)
+		go UltimateHealing(ev)
+		SmartRune(ev)
 		SafeMagicShield(ev)
 
 		if ev.Keychar == config.GetLoot {
