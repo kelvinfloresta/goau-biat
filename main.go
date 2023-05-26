@@ -18,7 +18,7 @@ func main() {
 		Label: "Select a command",
 		Items: []string{
 			"Rune",
-			"Loot",
+			"Hunt",
 			"Monitor",
 		},
 	}
@@ -30,11 +30,11 @@ func main() {
 	}
 
 	switch command {
-	case "Loot":
-		log.Default().Println("Starting loot")
+	case "Hunt":
+		log.Default().Println("Starting Hunt")
 		go commands.StartHunt()
 	case "Rune":
-		log.Default().Println("Starting rune")
+		log.Default().Println("Starting Rune")
 		go commands.StartRune()
 	case "Monitor":
 		log.Default().Println("Starting Monitor")
