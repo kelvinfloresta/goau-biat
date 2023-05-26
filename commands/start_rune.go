@@ -62,11 +62,15 @@ func makeRune() {
 
 	changeWindow()
 	logger.Println("Making rune")
-	for i := 0; i < 2; i++ {
+	for i := 0; i < 4; i++ {
 		robotgo.KeyTap(config.CreateRune)
 		runeCount += 1
 		logger.Printf("%d Rune made\n", runeCount)
 		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+
+		if paused {
+			return
+		}
 	}
 }
 
@@ -80,6 +84,10 @@ func equipSoft() {
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipSoft)
 		util.RandomSleep(2, time.Second)
+
+		if paused {
+			return
+		}
 	}
 }
 
@@ -93,6 +101,10 @@ func equipRing() {
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipRing)
 		util.RandomSleep(2, time.Second)
+
+		if paused {
+			return
+		}
 	}
 }
 
@@ -122,6 +134,10 @@ func eatFood() {
 	for i := 0; i < 4; i++ {
 		robotgo.KeyTap(config.EatFood)
 		util.RandomSleep(2, time.Second)
+
+		if paused {
+			return
+		}
 	}
 }
 
