@@ -19,6 +19,7 @@ func main() {
 		Items: []string{
 			"Rune",
 			"Hunt",
+			"Rune with restore window",
 			"Monitor",
 		},
 	}
@@ -35,7 +36,15 @@ func main() {
 		go commands.StartHunt()
 	case "Rune":
 		log.Default().Println("Starting Rune")
-		go commands.StartRune()
+		runeMaker := commands.RuneMaker{}
+		go runeMaker.Start()
+
+	case "Rune with restore window":
+		log.Default().Println("Starting Rune with restore window")
+		runeMaker := commands.RuneMaker{}
+		runeMaker.ShouldRestoreWindow = true
+		go runeMaker.Start()
+
 	case "Monitor":
 		log.Default().Println("Starting Monitor")
 		go startMonitor()

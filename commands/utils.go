@@ -17,7 +17,7 @@ func moveClick(x, y int, args ...any) {
 	robotgo.MoveClick(randX, randY, args...)
 }
 
-var pid = getPid()
+var clientPid = getPid()
 
 func getPid() int32 {
 	processList, err := ps.Processes()
@@ -36,6 +36,7 @@ func getPid() int32 {
 }
 
 func changeWindow() {
-	robotgo.ActivePID(pid)
+	logger.Println("Changing to client window")
+	robotgo.ActivePID(clientPid)
 	time.Sleep(1 * time.Second)
 }
