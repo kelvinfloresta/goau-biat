@@ -24,21 +24,21 @@ const (
 	ExuraVitaKey       = "v"
 	SafeMagicShieldKey = 'f'
 	Uh                 = 49 // 1
+	UhRp               = 50 // 2
 	UhX                = 1642
 	UhY                = 88
 	UhYDiff            = 20
-	UhRp               = 50 // 2
 
 	AttackRuneKey = 65457
 
 	EatFood        = "f7"
-	FoodTime       = 5 * time.Minute
+	FoodTime       = 4 * time.Minute
 	EquipRing      = "f8"
-	RingTime       = 1 * time.Minute
+	RingTime       = 1*time.Minute + 30*time.Second
 	EquipSoft      = "f9"
 	SoftTime       = 10 * time.Minute
 	CreateRune     = "f10"
-	RuneTime       = 5 * time.Minute
+	RuneTime       = 2 * (1*time.Minute + 15*time.Second)
 	AntiLogoutTime = 10 * time.Minute
 
 	X    = 870
