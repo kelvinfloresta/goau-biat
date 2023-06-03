@@ -11,8 +11,9 @@ import (
 
 func SafeMagicShield(ev hook.Event) {
 	if ev.Keychar == config.SafeMagicShieldKey {
-		delay := rand.Intn(100) + 100
-		time.Sleep(time.Millisecond * time.Duration(delay))
+		delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
+		time.Sleep(delay)
 		robotgo.KeyTap(config.ExuraVitaKey)
+		logger.Printf("Safe magic shield: %s", delay)
 	}
 }
