@@ -21,13 +21,15 @@ const (
 	PreUltimateTime = 10 * time.Second
 	UltimateTime    = 40 * time.Second
 
-	ExuraVitaKey       = "v"
-	SafeMagicShieldKey = 'f'
-	Uh                 = 49 // 1
-	UhRp               = 50 // 2
-	UhX                = 1642
-	UhY                = 88
-	UhYDiff            = 20
+	ExuraVitaKey          = "r"
+	SecondaryExuraVitaKey = "n"
+	SafeMagicShieldKey    = 'f'
+	SafeExuraMaxVitaKey   = 'v'
+	Uh                    = 49 // 1
+	UhRp                  = 50 // 2
+	UhX                   = 1642
+	UhY                   = 88
+	UhYDiff               = 20
 
 	AttackRuneKey = 65457
 
