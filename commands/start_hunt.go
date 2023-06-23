@@ -27,10 +27,4 @@ func StartHunt() {
 		if ev.Keychar == config.GetLoot {
 			GetLoot(ev)
 		}
-
-		if ev.Keychar == config.Checklist {
-			sounds.PlaySound(sounds.CheckListGoannas)
-		}
-
-	}
 }
