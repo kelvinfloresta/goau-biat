@@ -5,9 +5,11 @@ import (
 )
 
 const (
+	SsaKey                = 'g'
+	PotionKey             = "num9"
 	GetLoot               = '-'
 	Checklist      rune   = '*'
-	Pause          rune   = 27    // ESC
+	Pause          rune   = 65481 // ESC 27
 	PauseUh        uint16 = 65481 // F12
 	CleanHelpLoot  rune   = 65480 // F11
 	SetPosHelpLoop        = 'y'

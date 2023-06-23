@@ -22,6 +22,7 @@ func StartHunt() {
 		SmartRune(ev)
 		SafeMagicShield(ev)
 		SafeMaxVita(ev)
+		Safe("SSA", ev, config.Ssa, config.ExuraVitaKey, config.PotionKey)
 
 		if ev.Keychar == config.GetLoot {
 			GetLoot(ev)
