@@ -21,6 +21,7 @@ func StartHunt() {
 		go UltimateHealing(ev)
 		SmartRune(ev)
 		SafeMagicShield(ev)
+		SafeMaxVita(ev)
 
 		if ev.Keychar == config.GetLoot {
 			GetLoot(ev)
