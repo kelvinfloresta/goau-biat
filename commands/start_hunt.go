@@ -2,7 +2,6 @@ package commands
 
 import (
 	"goau-biat/config"
-	"goau-biat/sounds"
 
 	hook "github.com/robotn/gohook"
 )
@@ -23,8 +22,6 @@ func StartHunt() {
 		SafeMagicShield(ev)
 		SafeMaxVita(ev)
 		Safe("SSA", ev, config.Ssa, config.ExuraVitaKey, config.PotionKey)
-
-		if ev.Keychar == config.GetLoot {
-			GetLoot(ev)
-		}
+		GetLoot(ev)
+	}
 }

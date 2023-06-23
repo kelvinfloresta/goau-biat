@@ -10,7 +10,11 @@ import (
 	hook "github.com/robotn/gohook"
 )
 
-func GetLoot(el hook.Event) {
+func GetLoot(ev hook.Event) {
+	if ev.Keychar != config.GetLoot {
+		return
+	}
+
 	robotgo.KeyDown("alt")
 	moveClick(config.X-config.Diff, config.Y)
 	moveClick(config.X-config.Diff, config.Y-config.Diff)
