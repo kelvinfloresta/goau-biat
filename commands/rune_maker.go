@@ -18,7 +18,7 @@ type RuneMaker struct {
 	softTicker          *time.Ticker
 	makeRuneTicker      *time.Ticker
 	runeCount           int
-	currentWindow       int32
+	currentWindow       int
 	processCount        int
 	processCountMutex   sync.Mutex
 	ShouldRestoreWindow bool
@@ -194,7 +194,7 @@ func (r *RuneMaker) storeCurrentWindow() {
 	r.processCountMutex.Lock()
 	r.processCount += 1
 	r.processCountMutex.Unlock()
-	newCurrentWindow := robotgo.GetPID()
+	newCurrentWindow := robotgo.GetPid()
 
 	logger.Printf("total process %d\n", r.processCount)
 	if clientPid == newCurrentWindow || newCurrentWindow == r.currentWindow {
@@ -223,5 +223,5 @@ func (r *RuneMaker) restoreCurrentWindow() {
 	}
 
 	logger.Println("Restoring the window")
-	robotgo.ActivePID(r.currentWindow)
+	robotgo.ActivePid(r.currentWindow)
 }
