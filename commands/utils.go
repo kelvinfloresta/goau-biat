@@ -53,11 +53,5 @@ func forceClick(x, y int) {
 
 func forceClickDelay(x, y int) {
 	robotgo.MilliSleep(rand.Intn(20) + 30)
-	robotgo.Move(x, y)
-	currentX, currentY := robotgo.Location()
-	if currentX == x && currentY == y {
-		robotgo.Click()
-		return
-	}
 	forceClick(x, y)
 }
