@@ -10,11 +10,11 @@ import (
 	ps "github.com/mitchellh/go-ps"
 )
 
-func moveClick(x, y int, args ...any) {
-	randX := rand.Intn(5) + x
-	randY := rand.Intn(5) + y
+func moveClick(x, y int) {
+	randX := rand.Intn(15) + x
+	randY := rand.Intn(15) + y
 
-	robotgo.MoveClick(randX, randY, args...)
+	forceClickDelay(randX, randY)
 }
 
 var clientPid = getPid()
