@@ -3,6 +3,7 @@ package commands
 import (
 	"goau-biat/config"
 	"goau-biat/sounds"
+	"goau-biat/util"
 	"log"
 	"sync"
 
@@ -33,5 +34,9 @@ func togglePause(ev hook.Event) bool {
 }
 
 func isPauseEvent(ev hook.Event) bool {
+	if !util.IsKeyDown(ev.Kind) {
+		return false
+	}
+
 	return ev.Keychar == config.Pause || rune(ev.Rawcode) == config.Pause
 }
