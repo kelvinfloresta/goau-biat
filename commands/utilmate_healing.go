@@ -62,7 +62,7 @@ func UltimateHealing(ev hook.Event) {
 }
 
 func uhRp() {
-	randX := rand.Intn(20) + config.UhX
+	randX := rand.Intn(70) + config.UhX
 	randY := rand.Intn(3) + config.UhY + config.UhYDiff
 
 	delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
@@ -72,7 +72,7 @@ func uhRp() {
 }
 
 func uhEk() {
-	randX := rand.Intn(20) + config.UhX
+	randX := rand.Intn(70) + config.UhX
 	randY := rand.Intn(3) + config.UhY
 
 	delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
