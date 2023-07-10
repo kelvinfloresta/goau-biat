@@ -35,7 +35,7 @@ func getPid() int {
 	return 0
 }
 
-func changeWindow() {
+func ChangeWindow() {
 	logger.Println("Changing to client window")
 	robotgo.ActivePid(clientPid)
 	time.Sleep(1 * time.Second)

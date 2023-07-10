@@ -66,7 +66,7 @@ func (r *RuneMaker) makeRune() {
 		return
 	}
 
-	changeWindow()
+	ChangeWindow()
 	logger.Println("Making rune")
 	for i := 0; i < 4; i++ {
 		robotgo.KeyTap(config.CreateRune)
@@ -87,7 +87,7 @@ func (r *RuneMaker) equipSoft() {
 		return
 	}
 
-	changeWindow()
+	ChangeWindow()
 	logger.Println("Equipping Soft")
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipSoft)
@@ -106,7 +106,7 @@ func (r *RuneMaker) equipRing() {
 		return
 	}
 
-	changeWindow()
+	ChangeWindow()
 	logger.Println("Equipping Ring")
 	for i := 0; i < 2; i++ {
 		robotgo.KeyTap(config.EquipRing)
@@ -125,7 +125,7 @@ func (r *RuneMaker) stayLoggedIn() {
 		return
 	}
 
-	changeWindow()
+	ChangeWindow()
 	logger.Println("Staying logged in")
 	robotgo.KeyTap("up")
 	util.RandomSleep(5, time.Second)
@@ -143,7 +143,7 @@ func (r *RuneMaker) eatFood() {
 		return
 	}
 
-	changeWindow()
+	ChangeWindow()
 	logger.Println("Eating food")
 	for i := 0; i < 4; i++ {
 		robotgo.KeyTap(config.EatFood)
