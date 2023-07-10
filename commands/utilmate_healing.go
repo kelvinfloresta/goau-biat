@@ -47,22 +47,36 @@ func UltimateHealing(ev hook.Event) {
 	}
 
 	if ev.Rawcode == config.Uh && util.IsKeyDown(ev.Kind) {
-		randX := rand.Intn(20) + config.UhX
-		randY := rand.Intn(3) + config.UhY
-
-		delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
-		time.Sleep(delay)
-		robotgo.MoveClick(randX, randY)
-		log.Default().Printf("UH EK Delay: %s", delay)
+		uhEk()
+		robotgo.MilliSleep(20)
+		robotgo.KeyTap("f6")
+		uhEk()
 	}
 
 	if ev.Rawcode == config.UhRp && util.IsKeyDown(ev.Kind) {
-		randX := rand.Intn(20) + config.UhX
-		randY := rand.Intn(3) + config.UhY + config.UhYDiff
-
-		delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
-		time.Sleep(delay)
-		robotgo.MoveClick(randX, randY)
-		log.Default().Printf("UH RP Delay: %s", delay)
+		uhRp()
+		robotgo.MilliSleep(20)
+		robotgo.KeyTap("f6")
+		uhRp()
 	}
+}
+
+func uhRp() {
+	randX := rand.Intn(20) + config.UhX
+	randY := rand.Intn(3) + config.UhY + config.UhYDiff
+
+	delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
+	time.Sleep(delay)
+	forceClick(randX, randY)
+	log.Default().Printf("UH RP Delay: %s", delay)
+}
+
+func uhEk() {
+	randX := rand.Intn(20) + config.UhX
+	randY := rand.Intn(3) + config.UhY
+
+	delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
+	time.Sleep(delay)
+	forceClick(randX, randY)
+	log.Default().Printf("UH EK Delay: %s", delay)
 }
