@@ -40,3 +40,24 @@ func changeWindow() {
 	robotgo.ActivePid(clientPid)
 	time.Sleep(1 * time.Second)
 }
+
+func forceClick(x, y int) {
+	robotgo.Move(x, y)
+	currentX, currentY := robotgo.Location()
+	if currentX == x && currentY == y {
+		robotgo.Click()
+		return
+	}
+	forceClick(x, y)
+}
+
+func forceClickDelay(x, y int) {
+	robotgo.MilliSleep(rand.Intn(20) + 30)
+	robotgo.Move(x, y)
+	currentX, currentY := robotgo.Location()
+	if currentX == x && currentY == y {
+		robotgo.Click()
+		return
+	}
+	forceClick(x, y)
+}
