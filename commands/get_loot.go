@@ -36,7 +36,7 @@ func HelpLoot(el hook.Event) {
 	}
 
 	if el.Keychar == config.SetPosHelpLoop || rune(el.Rawcode) == config.SetPosHelpLoop {
-		x, y := robotgo.GetMousePos()
+		x, y := robotgo.Location()
 		log.Default().Printf("Set Help Loot: %d %d\n", x, y)
 		list = append(list, fmt.Sprintf("%d %d", x, y))
 	}
