@@ -2,25 +2,47 @@ package sounds
 
 import (
 	"fmt"
-	"goau-biat/config"
-	"io"
 	"os"
+	"sync"
+	"time"
 
-	"github.com/hajimehoshi/go-mp3"
-	"github.com/hajimehoshi/oto"
+	"goau-biat/config"
+
+	"github.com/ebitengine/oto/v3"
+	mp3 "github.com/hajimehoshi/go-mp3"
 )
 
 type SoundFile string
 
-const UltimateReloaded = "ultimate-reloaded"
-const PreUltimateReloaded = "pre-ultimate-reloaded"
-const CheckListLostSouls = "checklist-lost-souls"
-const CheckListGoannas = "checklist-goannas"
-const Paused = "paused"
-const Resumed = "resumed"
+const UltimateReloaded SoundFile = "ultimate-reloaded"
+const PreUltimateReloaded SoundFile = "pre-ultimate-reloaded"
+const CheckListLostSouls SoundFile = "checklist-lost-souls"
+const CheckListGoannas SoundFile = "checklist-goannas"
+const Paused SoundFile = "paused"
+const Resumed SoundFile = "resumed"
+
+var (
+	audioCtx  *oto.Context
+	audioOnce sync.Once
+)
+
+func ensureContext(sampleRate int) {
+	audioOnce.Do(func() {
+		c, ready, err := oto.NewContext(&oto.NewContextOptions{
+			SampleRate:   sampleRate,
+			ChannelCount: 2,
+			Format:       oto.FormatSignedInt16LE,
+		})
+		if err != nil {
+			return
+		}
+		<-ready
+		audioCtx = c
+	})
+}
 
 func PlaySound(file SoundFile) error {
-	path := fmt.Sprintf("/home/kelvin/workspace/goau-biat/sounds/%s/%s.mp3", config.Lang, file)
+	path := fmt.Sprintf("C:\\Users\\kelvi\\workspace\\goau-biat\\sounds\\%s\\%s.mp3", config.Lang, file)
 	f, err := os.Open(path)
 	if err != nil {
 		return err
@@ -32,17 +54,18 @@ func PlaySound(file SoundFile) error {
 		return err
 	}
 
-	c, err := oto.NewContext(d.SampleRate(), 2, 2, 8192)
-	if err != nil {
-		return err
+	ensureContext(d.SampleRate())
+
+	if audioCtx == nil {
+		return fmt.Errorf("audio context not initialized")
 	}
-	defer c.Close()
 
-	p := c.NewPlayer()
-	defer p.Close()
+	p := audioCtx.NewPlayer(d)
 
-	if _, err := io.Copy(p, d); err != nil {
-		return err
+	p.Play()
+
+	for p.IsPlaying() {
+		time.Sleep(50 * time.Millisecond)
 	}
 
 	return nil

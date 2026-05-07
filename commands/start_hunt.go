@@ -2,6 +2,7 @@ package commands
 
 import (
 	"goau-biat/config"
+	"goau-biat/util"
 
 	hook "github.com/robotn/gohook"
 )
@@ -9,19 +10,18 @@ import (
 func StartHunt() {
 	events := hook.Start()
 	for ev := range events {
+		if !util.IsClient() {
+			continue
+		}
+
 		togglePause(ev)
 
 		if paused {
 			continue
 		}
 
-		ScheduleTimer(ev)
-		HelpLoot(ev)
-		go UltimateHealing(ev)
-		SmartRune(ev)
 		SafeMagicShield(ev)
 		SafeMaxVita(ev)
 		Safe("SSA", ev, config.Ssa, config.ExuraVitaKey, config.PotionKey)
-		GetLoot(ev)
 	}
 }

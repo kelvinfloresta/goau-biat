@@ -1,21 +1,15 @@
 package commands
 
 import (
+	"fmt"
+	"goau-biat/util"
 	"log"
-	"math/rand"
 	"strings"
 	"time"
 
-	"github.com/go-vgo/robotgo"
+	"goau-biat/util/winapi"
 	ps "github.com/mitchellh/go-ps"
 )
-
-func moveClick(x, y int) {
-	randX := rand.Intn(15) + x
-	randY := rand.Intn(15) + y
-
-	forceClickDelay(randX, randY)
-}
 
 var clientPid = getPid()
 
@@ -27,7 +21,10 @@ func getPid() int {
 	}
 
 	for _, process := range processList {
-		if strings.Contains(process.Executable(), "client") && !strings.Contains(process.Executable(), "ts3") {
+		if strings.Contains(process.Executable(), "client.exe") &&
+			!strings.Contains(process.Executable(), "ts3") &&
+			!strings.Contains(process.Executable(), "launcher") {
+			fmt.Println(process.Pid())
 			return process.Pid()
 		}
 	}
@@ -36,22 +33,7 @@ func getPid() int {
 }
 
 func ChangeWindow() {
-	logger.Println("Changing to client window")
-	robotgo.ActivePid(clientPid)
+	util.Logger.Println("Changing to client window")
+	winapi.ActivePid(clientPid)
 	time.Sleep(1 * time.Second)
-}
-
-func forceClick(x, y int) {
-	robotgo.Move(x, y)
-	currentX, currentY := robotgo.Location()
-	if currentX == x && currentY == y {
-		robotgo.Click()
-		return
-	}
-	forceClick(x, y)
-}
-
-func forceClickDelay(x, y int) {
-	robotgo.MilliSleep(rand.Intn(20) + 30)
-	forceClick(x, y)
 }

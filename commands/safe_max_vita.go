@@ -2,18 +2,19 @@ package commands
 
 import (
 	"goau-biat/config"
+	"goau-biat/util"
+	"goau-biat/util/winapi"
 	"math/rand"
 	"time"
 
-	"github.com/go-vgo/robotgo"
 	hook "github.com/robotn/gohook"
 )
 
 func SafeMaxVita(ev hook.Event) {
 	if ev.Keychar == config.SafeExuraMaxVitaKey {
-		delay := time.Millisecond * time.Duration(rand.Intn(100)+100)
+		delay := time.Millisecond * time.Duration(rand.Intn(100)+50)
 		time.Sleep(delay)
-		robotgo.KeyTap(config.SecondaryExuraVitaKey)
-		logger.Printf("Safe exura max vita: %s", delay)
+		winapi.KeyTap(config.SecondaryExuraVitaKey)
+		util.Logger.Printf("Safe exura max vita: %s", delay)
 	}
 }

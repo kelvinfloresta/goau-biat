@@ -3,11 +3,11 @@ package commands
 import (
 	"goau-biat/config"
 	"goau-biat/util"
+	"goau-biat/util/winapi"
 	"math/rand"
 	"sync"
 	"time"
 
-	"github.com/go-vgo/robotgo"
 	hook "github.com/robotn/gohook"
 )
 
@@ -67,17 +67,21 @@ func (r *RuneMaker) makeRune() {
 	}
 
 	ChangeWindow()
-	logger.Println("Making rune")
+	util.Logger.Println("Making rune")
 	for i := 0; i < 4; i++ {
-		robotgo.KeyTap(config.CreateRune)
+		winapi.KeyTap(config.CreateRune)
 		r.runeCount += 1
-		logger.Printf("%d Rune made\n", r.runeCount)
+		util.Logger.Printf("%d Rune made\n", r.runeCount)
 		time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
 
 		if paused {
 			return
 		}
 	}
+
+	winapi.KeyTap("r")
+	time.Sleep((2 + time.Duration(rand.Intn(2))) * time.Second)
+
 	r.restoreCurrentWindow()
 }
 
@@ -88,9 +92,9 @@ func (r *RuneMaker) equipSoft() {
 	}
 
 	ChangeWindow()
-	logger.Println("Equipping Soft")
+	util.Logger.Println("Equipping Soft")
 	for i := 0; i < 2; i++ {
-		robotgo.KeyTap(config.EquipSoft)
+		winapi.KeyTap(config.EquipSoft)
 		util.RandomSleep(2, time.Second)
 
 		if paused {
@@ -107,9 +111,9 @@ func (r *RuneMaker) equipRing() {
 	}
 
 	ChangeWindow()
-	logger.Println("Equipping Ring")
+	util.Logger.Println("Equipping Ring")
 	for i := 0; i < 2; i++ {
-		robotgo.KeyTap(config.EquipRing)
+		winapi.KeyTap(config.EquipRing)
 		util.RandomSleep(2, time.Second)
 
 		if paused {
@@ -126,14 +130,14 @@ func (r *RuneMaker) stayLoggedIn() {
 	}
 
 	ChangeWindow()
-	logger.Println("Staying logged in")
-	robotgo.KeyTap("up")
+	util.Logger.Println("Staying logged in")
+	winapi.KeyTap("up")
 	util.RandomSleep(5, time.Second)
-	robotgo.KeyTap("down")
+	winapi.KeyTap("down")
 	util.RandomSleep(3, time.Second)
-	robotgo.KeyTap("right")
+	winapi.KeyTap("right")
 	util.RandomSleep(6, time.Second)
-	robotgo.KeyTap("left")
+	winapi.KeyTap("left")
 	r.restoreCurrentWindow()
 }
 
@@ -144,9 +148,9 @@ func (r *RuneMaker) eatFood() {
 	}
 
 	ChangeWindow()
-	logger.Println("Eating food")
+	util.Logger.Println("Eating food")
 	for i := 0; i < 4; i++ {
-		robotgo.KeyTap(config.EatFood)
+		winapi.KeyTap(config.EatFood)
 		util.RandomSleep(2, time.Second)
 
 		if paused {
@@ -194,15 +198,15 @@ func (r *RuneMaker) storeCurrentWindow() {
 	r.processCountMutex.Lock()
 	r.processCount += 1
 	r.processCountMutex.Unlock()
-	newCurrentWindow := robotgo.GetPid()
+	newCurrentWindow := winapi.GetPid()
 
-	logger.Printf("total process %d\n", r.processCount)
+	util.Logger.Printf("total process %d\n", r.processCount)
 	if clientPid == newCurrentWindow || newCurrentWindow == r.currentWindow {
-		logger.Println("No pid was stored", r.processCount)
+		util.Logger.Println("No pid was stored", r.processCount)
 		return
 	}
 
-	logger.Println("Storing pid")
+	util.Logger.Println("Storing pid")
 	r.currentWindow = newCurrentWindow
 }
 
@@ -215,13 +219,13 @@ func (r *RuneMaker) restoreCurrentWindow() {
 	r.processCountMutex.Lock()
 	r.processCount -= 1
 	r.processCountMutex.Unlock()
-	logger.Printf("total process %d\n", r.processCount)
+	util.Logger.Printf("total process %d\n", r.processCount)
 
 	if r.processCount > 0 {
-		logger.Println("window not restored. there is at least one process running")
+		util.Logger.Println("window not restored. there is at least one process running")
 		return
 	}
 
-	logger.Println("Restoring the window")
-	robotgo.ActivePid(r.currentWindow)
+	util.Logger.Println("Restoring the window")
+	winapi.ActivePid(r.currentWindow)
 }
